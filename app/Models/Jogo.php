@@ -11,6 +11,7 @@ class Jogo extends Model
 
     protected $fillable = [
         'igdb',
-        'nome'
+        'nome',
+        'nota'
     ];
 }
