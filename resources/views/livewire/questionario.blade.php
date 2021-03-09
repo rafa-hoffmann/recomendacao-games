@@ -6,7 +6,8 @@
         <div class="flex items-start">
             <div class="flex items-center h-5">
                 <input id="modo{{$modo->id}}" name="modos[]" type="checkbox"
-                    class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" wire:model="selectedModes" value="{{$modo->id}}">
+                    class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                    wire:model="selectedModes" value="{{$modo->id}}">
             </div>
             <div class="ml-3 text-sm">
                 <label for="modo{{$modo->id}}" class="font-medium text-gray-700">{{$modo->nome}}</label>
@@ -27,7 +28,8 @@
         <div class="flex items-start">
             <div class="flex items-center h-5">
                 <input id="genero{{$genero->id}}" name="generos[]" type="checkbox"
-                    class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" wire:model="selectedGenres" value="{{$genero->id}}">
+                    class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                    wire:model="selectedGenres" value="{{$genero->id}}">
             </div>
             <div class="ml-3 text-sm">
                 <label for="genero{{$genero->id}}" class="font-medium text-gray-700">{{$genero->nome}}</label>
@@ -49,7 +51,8 @@
         <div class="flex items-start">
             <div class="flex items-center h-5">
                 <input id="tema{{$tema->id}}" name="temas[]" type="checkbox"
-                    class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" wire:model="selectedThemes" value="{{$tema->id}}">
+                    class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                    wire:model="selectedThemes" value="{{$tema->id}}">
             </div>
             <div class="ml-3 text-sm">
                 <label for="tema{{$tema->id}}" class="font-medium text-gray-700">{{$tema->nome}}</label>
@@ -71,7 +74,8 @@
         <div class="flex items-start">
             <div class="flex items-center h-5">
                 <input id="perspectiva{{$perspectiva->id}}" name="perspectivas[]" type="checkbox"
-                    class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" wire:model="selectedPerspectives" value="{{$perspectiva->id}}">
+                    class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                    wire:model="selectedPerspectives" value="{{$perspectiva->id}}">
             </div>
             <div class="ml-3 text-sm">
                 <label for="perspectiva{{$perspectiva->id}}"
@@ -86,5 +90,15 @@
         </div>
         <x-button type="button" wire:click="getRecommendations">Gerar Recomendações</x-button>
     </div>
+    @endif
+
+    @if(!empty($jogos))
+    @foreach($jogos as $jogo)
+    <div class="mt-4 space-y-4">
+        <div class="flex items-start">
+            <p>{{$jogo->nome}}</p>
+        </div>
+    </div>
+    @endforeach
     @endif
 </div>

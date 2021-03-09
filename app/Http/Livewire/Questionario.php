@@ -17,7 +17,7 @@ class Questionario extends Component
     public $selectedModes = [];
     public $selectedThemes = [];
     public $selectedPerspectives = [];
-    public $games;
+    public $jogos;
 
     public function render()
     {
@@ -78,6 +78,6 @@ class Questionario extends Component
             $modo->save();
         }
 
-        dd($games);
+        $this->jogos = $jogos;
     }
 }
