@@ -17,7 +17,6 @@ class CreateGenerosTable extends Migration
             $table->id();
             $table->string('igdb');
             $table->string('nome');
-            $table->integer('nota')->default(0);
             $table->timestamps();
         });
     }

@@ -17,7 +17,7 @@ class Questionario extends Component
     public $selectedModes = [];
     public $selectedThemes = [];
     public $selectedPerspectives = [];
-    public $jogos;
+    public $jogos = [];
 
     public function render()
     {
@@ -49,20 +49,29 @@ class Questionario extends Component
     }
 
     public function getRecommendations() {
+        $modos = Modo::whereIn('id', $this->selectedModes)->get();
+        $generos = Genero::whereIn('id', $this->selectedGenres)->get();
+        $temas = Tema::whereIn('id', $this->selectedThemes)->get();
+        $perspectivas = Perspectiva::whereIn('id', $this->selectedPerspectives)->get();
 
-        $modos = Modo::whereIn('id', $this->selectedModes)->orderByDesc("nota")->get();
-        $generos = Genero::whereIn('id', $this->selectedGenres)->orderByDesc("nota")->get();
-        $temas = Tema::whereIn('id', $this->selectedThemes)->orderByDesc("nota")->get();
-        $perspectivas = Perspectiva::whereIn('id', $this->selectedPerspectives)->orderByDesc("nota")->get();
+        $games = Game::with(['game_modes', 'genres', 'themes', 'player_perspectives'])->where('total_rating_count', '>', 0)->where('category', 0)->orderBy('total_rating_count', 'desc');
 
-        $games = Game::whereIn('genres', array_column($generos->toArray(), "igdb"))
-        ->whereIn('game_modes', array_column($modos->toArray(), "igdb"))
-        ->whereIn('themes', array_column($temas->toArray(), "igdb"))
-        ->whereIn('player_perspectives', array_column($perspectivas->toArray(), "igdb"))
-        ->orderBy('total_rating_count', 'desc')
-        ->get();
+        if ($modos->first()) {
+            $games = $games->whereIn('game_modes', array_column($modos->toArray(), "igdb"));
+        }
+        if ($generos->first()) {
+            $games = $games->whereIn('genres', array_column($generos->toArray(), "igdb"));
+        }
+        if ($temas->first()) {
+            $games = $games->whereIn('themes', array_column($temas->toArray(), "igdb"));
+        }
+        if ($perspectivas->first()) {
+            $games = $games->whereIn('player_perspectives', array_column($perspectivas->toArray(), "igdb"));
+        }
 
-        $jogos = collect();
+        $games = $games->get();
+
+        $jogos = [];
         foreach($games as $game) {
             $jogo = Jogo::firstOrCreate(
                 ['igdb' => $game->id],
@@ -70,7 +79,7 @@ class Questionario extends Component
             );
             $jogo->nota++;
             $jogo->save();
-            $jogos->add($jogo);
+            $jogos[] = $jogo;
         }
 
         foreach($modos as $modo) {

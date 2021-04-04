@@ -12,6 +12,30 @@ class Jogo extends Model
     protected $fillable = [
         'igdb',
         'nome',
-        'nota'
+        'likes',
+        'dislikes'
     ];
+
+    protected $appends = ['avaliacoes'];
+
+    public function generos() {
+        return $this->belongsToMany(Genero::class);
+    }
+
+    public function modos() {
+        return $this->belongsToMany(Modo::class);
+    }
+
+    public function temas() {
+        return $this->belongsToMany(Tema::class);
+    }
+
+    public function perspectivas() {
+        return $this->belongsToMany(Perspectiva::class);
+    }
+
+    public function getAvaliacoesAttribute()
+    {
+        return $this->likes + $this->dislikes;
+    }
 }

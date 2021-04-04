@@ -79,10 +79,6 @@ class DatabaseSeeder extends Seeder
             'nome' => 'RPG'
         ]);
         Genero::create([
-            'igdb' => '4',
-            'nome' => 'Luta'
-        ]);
-        Genero::create([
             'igdb' => '13',
             'nome' => 'Simulador'
         ]);

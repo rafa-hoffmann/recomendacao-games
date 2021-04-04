@@ -19,7 +19,7 @@
         <div class="flex flex-1">
             <x-button type="button" wire:click="nextPage">Avançar</x-button>
         </div>
-        <x-button type="button" wire:click="getRecommendations">Gerar Recomendações</x-button>
+        <x-button type="button" wire:click="getRecommendations">Salvar</x-button>
     </div>
     @elseif($page == 1)
     <p class="text-2xl">Qual gênero você está a fim de jogar?</p>
@@ -42,7 +42,7 @@
             <x-button type="button" wire:click="previousPage">Voltar</x-button>
             <x-button type="button" class="ml-4" wire:click="nextPage">Avançar</x-button>
         </div>
-        <x-button type="button" wire:click="getRecommendations">Gerar Recomendações</x-button>
+        <x-button type="button" wire:click="getRecommendations">Salvar</x-button>
     </div>
     @elseif($page == 2)
     <p class="text-2xl">Escolha um ou mais temas de jogo</p>
@@ -65,7 +65,7 @@
             <x-button type="button" wire:click="previousPage">Voltar</x-button>
             <x-button type="button" class="ml-4" wire:click="nextPage">Avançar</x-button>
         </div>
-        <x-button type="button" wire:click="getRecommendations">Gerar Recomendações</x-button>
+        <x-button type="button" wire:click="getRecommendations">Salvar</x-button>
     </div>
     @elseif($page == 3)
     <p class="text-2xl">Por último, escolha algumas de suas perspectivas favoritas</p>
@@ -88,7 +88,7 @@
         <div class="flex flex-1">
             <x-button type="button" wire:click="previousPage">Voltar</x-button>
         </div>
-        <x-button type="button" wire:click="getRecommendations">Gerar Recomendações</x-button>
+        <x-button type="button" wire:click="getRecommendations">Salvar Preferências</x-button>
     </div>
     @endif
 
@@ -96,7 +96,7 @@
     @foreach($jogos as $jogo)
     <div class="mt-4 space-y-4">
         <div class="flex items-start">
-            <p>{{$jogo->nome}}</p>
+            <p>{{$jogo['nome']}}</p>
         </div>
     </div>
     @endforeach

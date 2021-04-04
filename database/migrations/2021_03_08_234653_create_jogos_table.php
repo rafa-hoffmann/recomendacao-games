@@ -17,7 +17,8 @@ class CreateJogosTable extends Migration
             $table->id();
             $table->string('igdb');
             $table->string('nome');
-            $table->integer('nota')->default(0);
+            $table->integer('likes')->default(0);
+            $table->integer('dislikes')->default(0);
             $table->timestamps();
         });
     }
